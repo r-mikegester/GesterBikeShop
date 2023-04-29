@@ -1,0 +1,7 @@
+{
+  "name": "GesterBikeShop",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
