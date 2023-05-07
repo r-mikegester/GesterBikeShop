@@ -1,28 +1,75 @@
 <template>
   <ion-app>
     <ion-split-pane content-id="main-content">
-      <ion-menu content-id="main-content" type="overlay">
-        <ion-content>
-          <ion-list id="inbox-list">
-            <ion-list-header>Inbox</ion-list-header>
-            <ion-note>hi@ionicframework.com</ion-note>
-
-            <ion-menu-toggle :auto-hide="false" v-for="(p, i) in appPages" :key="i">
-              <ion-item @click="selectedIndex = i" router-direction="root" :router-link="p.url" lines="none" :detail="false" class="hydrated" :class="{ selected: selectedIndex === i }">
-                <ion-icon aria-hidden="true" slot="start" :ios="p.iosIcon" :md="p.mdIcon"></ion-icon>
-                <ion-label>{{ p.title }}</ion-label>
+      <ion-menu content-id="main-content" type="push" mode="md">
+        <ion-header>
+          <ion-toolbar class="flex">
+            <img src="./assets/imgs/logo/mylogo.png" class="w-10 h-10  ml-5" slot="start" />
+            <ion-title class="text-base">GESTER BIKE SHOP</ion-title>
+            <ion-buttons slot="primary" mode="ios">
+              <ion-button>
+                <!---->
+              </ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+          <div class="rounded-3xl" v-if="isLoggedOut">
+            <ion-list-header class="-mt-5">
+              <ion-label class="text-2xl">Menu</ion-label>
+              <ion-button>Site Map</ion-button>
+            </ion-list-header>
+            <div class="rounded-3xl bg-white dark:bg-[#1f1f1f] w-full h-fit">
+              <ion-item href="/Home" :detail="true" class="rounded-2xl">
+                <ion-label>Home</ion-label>
               </ion-item>
-            </ion-menu-toggle>
-          </ion-list>
+              <ion-item href="/Services" :detail="true" class="rounded-2xl">
+                <ion-label>Services</ion-label>
+              </ion-item>
+              <ion-item href="/Contact" :detail="true" class="rounded-2xl">
+                <ion-label>Contact</ion-label>
+              </ion-item>
+              <ion-item href="/About" :detail="true" class="rounded-2xl">
+                <ion-label>About</ion-label>
+              </ion-item>
+              <ion-item href="/Settings" :detail="true" class="rounded-2xl">
+                <ion-label>Settings</ion-label>
+              </ion-item>
 
-          <ion-list id="labels-list">
-            <ion-list-header>Labels</ion-list-header>
+            </div>
+          </div>
+          <div class="rounded-2xl">
+            <ion-list-header class="-mt-1">
+              <ion-label class="text-2xl">Administration</ion-label>
+              <ion-button v-if="isLoggedIn">Site Map</ion-button>
+            </ion-list-header>
+            <div class="rounded-2xl bg-[#1f1f1f] w-full h-fit">
+              <ion-item href="/Admin" v-if="isLoggedIn" :detail="true" class="rounded-2xl">
+                <ion-label>Dashboard</ion-label>
+              </ion-item>
+              <ion-item href="/Clients" v-if="isLoggedIn" :detail="true" class="rounded-2xl">
+                <ion-label>Clients</ion-label>
+              </ion-item>
+              <ion-item href="/Notifications" v-if="isLoggedIn" :detail="true" class="rounded-2xl">
+                <ion-label>Notifications</ion-label>
+              </ion-item>
+              <ion-item href="/Settings" v-if="isLoggedIn" :detail="true" class="rounded-2xl">
+                <ion-label>Settings</ion-label>
+              </ion-item>
+              <ion-item href="/SignIn" v-if="isLoggedOut" :detail="true" class="rounded-2xl">
+                <ion-label>Sign in</ion-label>
+              </ion-item>
+              <ion-item href="/Register" v-if="isLoggedOut" :detail="true" class="rounded-2xl">
+                <ion-label>Sign up</ion-label>
+              </ion-item>
+              
+              <ion-item @click="handleSignOut" v-if="isLoggedIn" :detail="true" class="rounded-2xl">
+                <ion-label>Logout</ion-label>
+              </ion-item>
 
-            <ion-item v-for="(label, index) in labels" lines="none" :key="index">
-              <ion-icon aria-hidden="true" slot="start" :ios="bookmarkOutline" :md="bookmarkSharp"></ion-icon>
-              <ion-label>{{ label }}</ion-label>
-            </ion-item>
-          </ion-list>
+
+            </div>
+          </div>
         </ion-content>
       </ion-menu>
       <ion-router-outlet id="main-content"></ion-router-outlet>
@@ -31,203 +78,53 @@
 </template>
 
 <script setup lang="ts">
+import { Icon } from '@iconify/vue';
+import { onMounted, ref } from "vue";
+import { useRouter } from 'vue-router';
+import { Auth, getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
+const router = useRouter();
+const isLoggedIn = ref(false);
+const isLoggedOut = ref(true);
+
+let auth: Auth;
+onMounted(() => {
+  auth = getAuth();
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      isLoggedIn.value = true;
+      isLoggedOut.value= false;
+    } else {
+      isLoggedIn.value = false;
+      isLoggedOut.value = true;
+    }
+  });
+});
+const handleSignOut = () => {
+  signOut(auth).then(() => {
+    router.push("/");
+  });
+
+};
 import {
   IonApp,
   IonContent,
-  IonIcon,
-  IonItem,
-  IonLabel,
-  IonList,
-  IonListHeader,
   IonMenu,
-  IonMenuToggle,
-  IonNote,
   IonRouterOutlet,
   IonSplitPane,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
+  IonItem,
+  IonLabel,
+  IonButton,
+  IonListHeader,
+  IonList,
+  IonButtons,
+
+
+
 } from '@ionic/vue';
-import { ref } from 'vue';
 import {
-  archiveOutline,
-  archiveSharp,
-  bookmarkOutline,
-  bookmarkSharp,
-  heartOutline,
-  heartSharp,
-  mailOutline,
-  mailSharp,
-  paperPlaneOutline,
-  paperPlaneSharp,
-  trashOutline,
-  trashSharp,
-  warningOutline,
-  warningSharp,
+ 
 } from 'ionicons/icons';
-
-const selectedIndex = ref(0);
-const appPages = [
-  {
-    title: 'Inbox',
-    url: '/folder/Inbox',
-    iosIcon: mailOutline,
-    mdIcon: mailSharp,
-  },
-  {
-    title: 'Outbox',
-    url: '/folder/Outbox',
-    iosIcon: paperPlaneOutline,
-    mdIcon: paperPlaneSharp,
-  },
-  {
-    title: 'Favorites',
-    url: '/folder/Favorites',
-    iosIcon: heartOutline,
-    mdIcon: heartSharp,
-  },
-  {
-    title: 'Archived',
-    url: '/folder/Archived',
-    iosIcon: archiveOutline,
-    mdIcon: archiveSharp,
-  },
-  {
-    title: 'Trash',
-    url: '/folder/Trash',
-    iosIcon: trashOutline,
-    mdIcon: trashSharp,
-  },
-  {
-    title: 'Spam',
-    url: '/folder/Spam',
-    iosIcon: warningOutline,
-    mdIcon: warningSharp,
-  },
-];
-const labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-
-const path = window.location.pathname.split('folder/')[1];
-if (path !== undefined) {
-  selectedIndex.value = appPages.findIndex((page) => page.title.toLowerCase() === path.toLowerCase());
-}
 </script>
-
-<style scoped>
-ion-menu ion-content {
-  --background: var(--ion-item-background, var(--ion-background-color, #fff));
-}
-
-ion-menu.md ion-content {
-  --padding-start: 8px;
-  --padding-end: 8px;
-  --padding-top: 20px;
-  --padding-bottom: 20px;
-}
-
-ion-menu.md ion-list {
-  padding: 20px 0;
-}
-
-ion-menu.md ion-note {
-  margin-bottom: 30px;
-}
-
-ion-menu.md ion-list-header,
-ion-menu.md ion-note {
-  padding-left: 10px;
-}
-
-ion-menu.md ion-list#inbox-list {
-  border-bottom: 1px solid var(--ion-color-step-150, #d7d8da);
-}
-
-ion-menu.md ion-list#inbox-list ion-list-header {
-  font-size: 22px;
-  font-weight: 600;
-
-  min-height: 20px;
-}
-
-ion-menu.md ion-list#labels-list ion-list-header {
-  font-size: 16px;
-
-  margin-bottom: 18px;
-
-  color: #757575;
-
-  min-height: 26px;
-}
-
-ion-menu.md ion-item {
-  --padding-start: 10px;
-  --padding-end: 10px;
-  border-radius: 4px;
-}
-
-ion-menu.md ion-item.selected {
-  --background: rgba(var(--ion-color-primary-rgb), 0.14);
-}
-
-ion-menu.md ion-item.selected ion-icon {
-  color: var(--ion-color-primary);
-}
-
-ion-menu.md ion-item ion-icon {
-  color: #616e7e;
-}
-
-ion-menu.md ion-item ion-label {
-  font-weight: 500;
-}
-
-ion-menu.ios ion-content {
-  --padding-bottom: 20px;
-}
-
-ion-menu.ios ion-list {
-  padding: 20px 0 0 0;
-}
-
-ion-menu.ios ion-note {
-  line-height: 24px;
-  margin-bottom: 20px;
-}
-
-ion-menu.ios ion-item {
-  --padding-start: 16px;
-  --padding-end: 16px;
-  --min-height: 50px;
-}
-
-ion-menu.ios ion-item.selected ion-icon {
-  color: var(--ion-color-primary);
-}
-
-ion-menu.ios ion-item ion-icon {
-  font-size: 24px;
-  color: #73849a;
-}
-
-ion-menu.ios ion-list#labels-list ion-list-header {
-  margin-bottom: 8px;
-}
-
-ion-menu.ios ion-list-header,
-ion-menu.ios ion-note {
-  padding-left: 16px;
-  padding-right: 16px;
-}
-
-ion-menu.ios ion-note {
-  margin-bottom: 8px;
-}
-
-ion-note {
-  display: inline-block;
-  font-size: 16px;
-
-  color: var(--ion-color-medium-shade);
-}
-
-ion-item.selected {
-  --color: var(--ion-color-primary);
-}
-</style>
