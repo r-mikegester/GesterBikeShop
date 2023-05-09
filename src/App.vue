@@ -15,55 +15,55 @@
         </ion-header>
         <ion-content class="ion-padding">
           <div class="rounded-3xl" v-if="isLoggedOut">
-            <ion-list-header class="-mt-5">
+            <ion-list-header class="-mt-1">
               <ion-label class="text-2xl">Menu</ion-label>
-              <ion-button>Site Map</ion-button>
+              <ion-button href="/SiteMap">Site Map</ion-button>
             </ion-list-header>
             <div class="rounded-3xl bg-white dark:bg-[#1f1f1f] w-full h-fit">
-              <ion-item href="/Home" :detail="true" class="rounded-2xl">
+              <ion-item href="/Home" :detail="true" class="rounded-2xl bg-white">
                 <ion-label>Home</ion-label>
               </ion-item>
-              <ion-item href="/Services" :detail="true" class="rounded-2xl">
+              <ion-item href="/Services" :detail="true" class="rounded-2xl bg-white">
                 <ion-label>Services</ion-label>
               </ion-item>
-              <ion-item href="/Contact" :detail="true" class="rounded-2xl">
+              <ion-item href="/Contact" :detail="true" class="rounded-2xl bg-white">
                 <ion-label>Contact</ion-label>
               </ion-item>
-              <ion-item href="/About" :detail="true" class="rounded-2xl">
+              <ion-item href="/About" :detail="true" class="rounded-2xl bg-white">
                 <ion-label>About</ion-label>
               </ion-item>
-              <ion-item href="/Settings" :detail="true" class="rounded-2xl">
+              <ion-item href="/Settings" :detail="true" class="rounded-2xl bg-white">
                 <ion-label>Settings</ion-label>
               </ion-item>
 
             </div>
           </div>
           <div class="rounded-2xl">
-            <ion-list-header class="-mt-1">
-              <ion-label class="text-2xl">Administration</ion-label>
+            <ion-list-header class="mt-5">
+              <ion-label class="text-2xl ">Administration</ion-label>
               <ion-button v-if="isLoggedIn">Site Map</ion-button>
             </ion-list-header>
-            <div class="rounded-2xl bg-[#1f1f1f] w-full h-fit">
-              <ion-item href="/Admin" v-if="isLoggedIn" :detail="true" class="rounded-2xl">
+            <div class="rounded-2xl bg-white dark:bg-[#1f1f1f] w-full h-fit">
+              <ion-item href="/Admin" v-if="isLoggedIn" :detail="true" class="rounded-2xl bg-white">
                 <ion-label>Dashboard</ion-label>
               </ion-item>
-              <ion-item href="/Clients" v-if="isLoggedIn" :detail="true" class="rounded-2xl">
+              <ion-item href="/Clients" v-if="isLoggedIn" :detail="true" class="rounded-2xl bg-white">
                 <ion-label>Clients</ion-label>
               </ion-item>
-              <ion-item href="/Notifications" v-if="isLoggedIn" :detail="true" class="rounded-2xl">
+              <ion-item href="/Notifications" v-if="isLoggedIn" :detail="true" class="rounded-2xl bg-white">
                 <ion-label>Notifications</ion-label>
               </ion-item>
-              <ion-item href="/Settings" v-if="isLoggedIn" :detail="true" class="rounded-2xl">
+              <ion-item href="/Settings" v-if="isLoggedIn" :detail="true" class="rounded-2xl bg-white">
                 <ion-label>Settings</ion-label>
               </ion-item>
-              <ion-item href="/SignIn" v-if="isLoggedOut" :detail="true" class="rounded-2xl">
+              <ion-item href="/SignIn" v-if="isLoggedOut" :detail="true" class="rounded-2xl bg-white">
                 <ion-label>Sign in</ion-label>
               </ion-item>
-              <ion-item href="/Register" v-if="isLoggedOut" :detail="true" class="rounded-2xl">
+              <ion-item href="/Register" v-if="isLoggedOut" :detail="true" class="rounded-2xl bg-white">
                 <ion-label>Sign up</ion-label>
               </ion-item>
               
-              <ion-item @click="handleSignOut" v-if="isLoggedIn" :detail="true" class="rounded-2xl">
+              <ion-item @click="handleSignOut" v-if="isLoggedIn" :detail="true" class="rounded-2xl bg-white">
                 <ion-label>Logout</ion-label>
               </ion-item>
 
