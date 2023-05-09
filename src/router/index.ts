@@ -12,7 +12,7 @@ import SignIn from '../views/SignIn.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '',
+    path: '/',
     redirect: '/Home'
   },
   {
@@ -53,6 +53,10 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/DarkMode',
     component: () => import ('../theme/DarkModeToggle.vue')
+  },
+  {
+    path: '/SiteMap',
+    component: () => import ('../views/SiteMap.vue')
   }
 ];
 
