@@ -16,47 +16,64 @@
         </ion-toolbar>
       </ion-header>
 
-      <div id="container" class="bg-white">
-        <section class="bg-white dark:bg-gray-900">
-          <div class="container px-6 py-12 mx-auto">
-            <div class="text-center">
-              <p class="font-medium text-blue-500 dark:text-blue-400"></p>
+      <div id="container" class="">
+        <section class="min-h-screen bg-white dark:bg-gray-900">
+          <div class="container px-6 py-20 mt-80 mx-auto bg-white dark:bg-gray-900">
+            <div class="lg:flex lg:items-center lg:-mx-10">
+              <div class="lg:w-1/2 lg:mx-10">
+                <h1 class="text-2xl font-semibold text-gray-800 capitalize dark:text-white lg:text-3xl">
+                  Let’s talk
+                </h1>
 
-              <h1 class="mt-2 text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-500 to-emerald-900 md:text-3xl dark:text-gray-100">Get in touch</h1>
+                <p class="mt-4 text-gray-500 dark:text-gray-400">
+                  Ask us everything and we would love to hear from you
+                </p>
 
-              <p class="mt-3 text-gray-500 dark:text-gray-400">Your Friendly Cycling Mechanics <br/>and Support is always here to Help.</p>
-            </div>
+                <form @submit.prevent="handleSubmit" class="mt-12 text-left text-xl font-bold">
+                  <div class="-mx-2 md:items-center md:flex">
+                    <div class="flex-1 px-2">
+                      <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Full Name:</label>
+                      <input type="text" id="name" v-model="name" placeholder="John Doe" required
+                        class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-2xl dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-emerald-400 dark:focus:border-emerald-400 focus:ring-emerald-400  focus:ring focus:ring-opacity-40" />
+                    </div>
 
-            <div class="grid grid-cols-1 gap-12 mt-10 md:grid-cols-2 lg:grid-cols-3">
-              <div class="flex flex-col items-center justify-center text-center">
-                <span class="p-3 text-blue-500 rounded-full bg-blue-100/80 dark:bg-gray-800">
-                  <Icon icon="ant-design:facebook-outlined" class="w-10 h-10  bg-clip-text text-transparent bg-gradient-to-r from-green-500 to-emerald-900" />
-                </span>
+                    <div class="flex-1 px-2 mt-4 md:mt-0">
+                      <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Email address:</label>
+                      <input type="email" id="email" v-model="email" placeholder="johndoe@example.com" required
+                        class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-2xl dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-emerald-400 dark:focus:border-emerald-400 focus:ring-emerald-400  focus:ring focus:ring-opacity-40" />
+                    </div>
+                  </div>
 
-                <h2 class="mt-4 text-lg font-medium text-gray-800 dark:text-white">Email</h2>
-                <p class="mt-2 text-gray-500 dark:text-gray-400">Our friendly team is here to help.</p>
-                <p class="mt-2 text-blue-500 dark:text-blue-400">Gester Bike Shop</p>
-              </div>
-              
+                  <div class="w-full mt-4">
+                    <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Your Message:</label>
+                    <textarea id="message" v-model="message" required
+                      class="block w-full h-32 px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-2xl md:h-56 dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-emerald-400 dark:focus:border-emerald-400 focus:ring-emerald-400  focus:ring focus:ring-opacity-40"
+                      placeholder="Message"></textarea>
+                  </div>
 
-              <div class="flex flex-col items-center justify-center text-center">
-                <span class="p-3 text-blue-500 rounded-full bg-blue-100/80 dark:bg-gray-800">
-                  <Icon icon="ic:round-alternate-email" class="w-10 h-10  bg-clip-text text-transparent bg-gradient-to-r from-green-500 to-emerald-900" />
-                </span>
+                  <button type="submit"
+                    class="w-full bg-emerald-900 px-6 py-3 mt-4 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform rounded-md hover:bg-emerald-400  focus:ring focus:ring-emerald-300 focus:ring-opacity-50">
+                    Contact us
+                  </button>
+                  <button type="button" @click="handleClear"
+                    class="w-full px-6 py-3 mt-4 text-sm font-medium tracking-wide text-gray-800 capitalize transition-colors duration-300 transform bg-gray-300 rounded-md hover:bg-gray-400  focus:ring focus:ring-gray-300 focus:ring-opacity-50">
+                    Clear
+                  </button>
+                </form>
+                <div class="m-3 rounded-3xl">
 
-                <h2 class="mt-4 text-lg font-medium text-gray-800 dark:text-white">Email</h2>
-                <p class="mt-2 text-gray-500 dark:text-gray-400">Send us you.</p>
-                <p class="mt-2 text-blue-500 dark:text-blue-400">gester.bikeshop@gmail.com</p>
-              </div>
+                  <ion-card mode="ios" class="rounded-3xl p-3">
+                    <h1>Message Preview</h1>
+                    <ion-card-header>
+                      <ion-card-title class="text-xl">{{ name }}</ion-card-title>
+                      <ion-card-subtitle class="text-xs lowercase">{{ email }}</ion-card-subtitle>
+                    </ion-card-header>
 
-              <div class="flex flex-col items-center justify-center text-center">
-                <span class="p-3 text-blue-500 rounded-full bg-blue-100/80 dark:bg-gray-800">
-                  <Icon icon="heroicons-outline:phone" class="w-10 h-10  bg-clip-text text-transparent bg-gradient-to-r from-green-500 to-emerald-900" />
-                </span>
-
-                <h2 class="mt-4 text-lg font-medium text-gray-800 dark:text-white">Phone Number</h2>
-                <p class="mt-2 text-gray-500 dark:text-gray-400">Tue - Wed from 9am to 5pm.</p> 
-                <p class="mt-2 text-blue-500 dark:text-blue-400">+63 (912) 345-6789</p>
+                    <ion-card-content class="bg-gray-200 dark:bg-gray-800 m-3 rounded-xl h-20">
+                      <p class="py-5 text-white">{{ message }}</p>
+                    </ion-card-content>
+                  </ion-card>
+                </div>
               </div>
             </div>
           </div>
@@ -66,9 +83,59 @@
   </ion-page>
 </template>
 
-<script setup lang="ts">
-import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
-import { Icon } from '@iconify/vue';
+<script lang="ts">
+import {
+  IonButtons,
+  IonContent,
+  IonHeader,
+  IonMenuButton,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+  IonCard, IonCardContent, IonCardTitle, IonCardSubtitle, IonCardHeader
+} from "@ionic/vue";
+import { Icon } from "@iconify/vue";
+import { defineComponent, ref } from "vue";
+import { getFirestore } from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
+
+
+export default defineComponent({
+  components: {
+    IonButtons,
+    IonContent,
+    IonHeader,
+    IonMenuButton,
+    IonPage,
+    IonTitle,
+    IonToolbar,
+    Icon, IonCard, IonCardContent, IonCardTitle, IonCardSubtitle, IonCardHeader
+  },
+  data() {
+    return {
+      name: ref(""),
+      email: ref(""),
+      message: ref(""),
+    };
+  },
+  methods: {
+    handleClear() {
+      this.name = '';
+      this.email = '';
+      this.message = '';
+    },
+    async handleSubmit() {
+      let userMessage = {
+        name: this.name,
+        email: this.email,
+        message: this.message,
+      };
+      const db = getFirestore();
+      const docRef = await addDoc(collection(db, "userMessages"), userMessage);
+      console.log("Document written with ID: ", docRef.id);
+    },
+  },
+});
 </script>
 
 <style scoped>
@@ -95,4 +162,5 @@ import { Icon } from '@iconify/vue';
 
 #container a {
   text-decoration: none;
-}</style>
+}
+</style>
