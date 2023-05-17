@@ -25,7 +25,7 @@
       </div>-->
 
       <div
-        class="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-transparent lg:max-w-4xl">
+        class="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg  dark:bg-transparent lg:max-w-4xl">
         <div class="hidden bg-cover lg:block lg:w-1/2"
           style="background-image: url('https://images.unsplash.com/photo-1606660265514-358ebbadc80d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1575&q=80');">
         </div>
@@ -71,7 +71,7 @@
 
           <div class="mt-4">
             <button @click="register"
-              class="w-full px-6 py-4 text-sm font-medium tracking-wide text-white  transition-colors duration-300 transform bg-gray-800 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50">
+              class="w-full px-6 py-4 text-sm font-medium tracking-wide text-white  transition-colors duration-300 transform bg-emerald-700 dark:bg-gray-800 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50">
              Sign up
             </button>
           </div>
