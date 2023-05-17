@@ -17,53 +17,53 @@
           <div class="rounded-3xl" v-if="isLoggedOut">
             <ion-list-header class="-mt-1">
               <ion-label class="text-2xl">Menu</ion-label>
-              <ion-button href="/SiteMap">Site Map</ion-button>
+              <ion-button router-link="/SiteMap" router-direction="forward" class="text-emerald-500">Site Map</ion-button>
             </ion-list-header>
             <div class="rounded-3xl bg-white dark:bg-[#1f1f1f] w-full h-fit">
-              <ion-item href="/Home" :detail="true" class="rounded-2xl bg-white">
+ 
+              <ion-item router-link="/Home" router-direction="forward" :detail="true" class="rounded-2xl bg-gray-100 dark:bg-[#1f1f1f]">
                 <ion-label>Home</ion-label>
               </ion-item>
-              <ion-item href="/Services" :detail="true" class="rounded-2xl bg-white">
+              <ion-item router-link="/Services" router-direction="forward" :detail="true" class="rounded-2xl bg-gray-100 dark:bg-[#1f1f1f]">
                 <ion-label>Services</ion-label>
               </ion-item>
-              <ion-item href="/Contact" :detail="true" class="rounded-2xl bg-white">
+              <ion-item  router-link="/Contact" router-direction="forward" :detail="true" class="rounded-2xl bg-gray-100 dark:bg-[#1f1f1f]">
                 <ion-label>Contact</ion-label>
               </ion-item>
-              <ion-item href="/About" :detail="true" class="rounded-2xl bg-white">
+              <ion-item router-link="/About" router-direction="forward" :detail="true" class="rounded-2xl bg-gray-100 dark:bg-[#1f1f1f]">
                 <ion-label>About</ion-label>
               </ion-item>
-              <ion-item href="/Settings" :detail="true" class="rounded-2xl bg-white">
-                <ion-label>Settings</ion-label>
-              </ion-item>
+             
 
             </div>
           </div>
           <div class="rounded-2xl">
             <ion-list-header class="mt-5">
               <ion-label class="text-2xl ">Administration</ion-label>
-              <ion-button v-if="isLoggedIn">Site Map</ion-button>
+              <ion-button  router-link="/SiteMap" router-direction="forward" v-if="isLoggedIn" class="text-emerald-500">Site Map</ion-button>
             </ion-list-header>
             <div class="rounded-2xl bg-white dark:bg-[#1f1f1f] w-full h-fit">
-              <ion-item href="/Admin" v-if="isLoggedIn" :detail="true" class="rounded-2xl bg-white">
+              <ion-item router-link="/Admin" router-direction="forward" v-if="isLoggedIn" :detail="true" class="rounded-2xl bg-gray-100 dark:bg-[#1f1f1f]">
                 <ion-label>Dashboard</ion-label>
               </ion-item>
-              <ion-item href="/Clients" v-if="isLoggedIn" :detail="true" class="rounded-2xl bg-white">
+              <ion-item router-link="/Messages" router-direction="forward" v-if="isLoggedIn" :detail="true" class="rounded-2xl bg-gray-100 dark:bg-[#1f1f1f]">
+                <ion-label>Messages</ion-label>
+              </ion-item>
+              <ion-item router-link="/Clients" router-direction="forward" v-if="isLoggedIn" :detail="true" class="rounded-2xl bg-gray-100 dark:bg-[#1f1f1f]">
                 <ion-label>Clients</ion-label>
               </ion-item>
-              <ion-item href="/Notifications" v-if="isLoggedIn" :detail="true" class="rounded-2xl bg-white">
+              <ion-item router-link="/Notifications" router-direction="forward" v-if="isLoggedIn" :detail="true" class="rounded-2xl bg-gray-100 dark:bg-[#1f1f1f]">
                 <ion-label>Notifications</ion-label>
               </ion-item>
-              <ion-item href="/Settings" v-if="isLoggedIn" :detail="true" class="rounded-2xl bg-white">
-                <ion-label>Settings</ion-label>
-              </ion-item>
-              <ion-item href="/SignIn" v-if="isLoggedOut" :detail="true" class="rounded-2xl bg-white">
+           
+              <ion-item router-link="/SignIn" router-direction="forward" v-if="isLoggedOut" :detail="true" class="rounded-2xl bg-gray-100 dark:bg-[#1f1f1f]">
                 <ion-label>Sign in</ion-label>
               </ion-item>
-              <ion-item href="/Register" v-if="isLoggedOut" :detail="true" class="rounded-2xl bg-white">
+              <ion-item router-link="/Register" router-direction="forward" v-if="isLoggedOut" :detail="true" class="rounded-2xl bg-gray-100 dark:bg-[#1f1f1f]">
                 <ion-label>Sign up</ion-label>
               </ion-item>
               
-              <ion-item @click="handleSignOut" v-if="isLoggedIn" :detail="true" class="rounded-2xl bg-white">
+              <ion-item @click="handleSignOut" v-if="isLoggedIn" :detail="true" class="rounded-2xl bg-gray-100 dark:bg-[#1f1f1f]">
                 <ion-label>Logout</ion-label>
               </ion-item>
 
