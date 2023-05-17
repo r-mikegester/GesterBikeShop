@@ -28,7 +28,7 @@
                 <p class="mt-4 text-gray-500 dark:text-gray-400">
                   Ask us everything and we would love to hear from you
                 </p>
-
+               
                 <form @submit.prevent="handleSubmit" class="mt-12 text-left text-xl font-bold">
                   <div class="-mx-2 md:items-center md:flex">
                     <div class="flex-1 px-2">
@@ -50,7 +50,7 @@
                       class="block w-full h-32 px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-2xl md:h-56 dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-emerald-400 dark:focus:border-emerald-400 focus:ring-emerald-400  focus:ring focus:ring-opacity-40"
                       placeholder="Message"></textarea>
                   </div>
-
+ <div v-if="isSent" class="text-green-500 mt-4 font-extrabold uppercase text-center" @transitionend="handleFadeEnd">Send successful!</div>
                   <button type="submit"
                     class="w-full bg-emerald-900 px-6 py-3 mt-4 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform rounded-md hover:bg-emerald-400  focus:ring focus:ring-emerald-300 focus:ring-opacity-50">
                     Contact us
@@ -116,6 +116,7 @@ export default defineComponent({
       name: ref(""),
       email: ref(""),
       message: ref(""),
+      isSent: false,
     };
   },
   methods: {
@@ -133,12 +134,32 @@ export default defineComponent({
       const db = getFirestore();
       const docRef = await addDoc(collection(db, "userMessages"), userMessage);
       console.log("Document written with ID: ", docRef.id);
+      this.isSent = true; // Set the flag to true after successful send
+      setTimeout(() => {
+        this.isSent = false;
+      }, 3000);
+    },
+    handleFadeEnd() {
+      if (!this.isSent) {
+        // Reset the form fields when the message is hidden
+        this.name = "";
+        this.email = "";
+        this.message = "";
+      }
     },
   },
 });
 </script>
 
 <style scoped>
+.fade {
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+
+.fade-out {
+  opacity: 0;
+}
 #container {
   text-align: center;
   position: absolute;
