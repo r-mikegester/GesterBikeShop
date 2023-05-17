@@ -23,6 +23,7 @@
     "@vueuse/core": "^10.1.2",
     "firebase": "^9.22.0",
     "ionicons": "^7.0.0",
+    "terser": "^5.17.4",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6"
   },
