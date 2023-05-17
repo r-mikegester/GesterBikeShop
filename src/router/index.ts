@@ -57,7 +57,20 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/SiteMap',
     component: () => import ('../views/SiteMap.vue')
+  },
+  {
+    path: '/Messages',
+    component: () => import ('../views/Messages.vue')
+  },
+  {
+    path: '/Clients',
+    component: () => import ('../views/Clients.vue')
+  },
+  {
+    path: '/Notifications',
+    component: () => import ('../views/Notifications.vue')
   }
+
 ];
 
 const router = createRouter({
