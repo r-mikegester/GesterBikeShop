@@ -26,7 +26,7 @@
       </div>-->
 
       <div
-        class="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-transparent lg:max-w-4xl">
+        class="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg dark:bg-transparent lg:max-w-4xl">
         <div class="hidden bg-cover lg:block lg:w-1/2"
           style="background-image: url('https://images.unsplash.com/photo-1606660265514-358ebbadc80d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1575&q=80');">
         </div>
@@ -53,7 +53,7 @@
           <div class="mt-4">
             <label class="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200" for="LoggingEmailAddress">Email</label>
             <input id="LoggingEmailAddress" v-model="email" required
-              class="block w-full px-4 py-4 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
+              class="block w-full px-4 py-4 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-emerald-400 focus:ring-opacity-40 dark:focus:border-emerald-300 focus:outline-none focus:ring focus:ring-blue-300"
               type="email" />
           </div>
 
@@ -71,7 +71,7 @@
           <p v-if="errMsg" class="text-red-500 my-5">{{ errMsg }}</p>
           <div class="mt-4">
             <button @click="register"
-              class="w-full px-6 py-4 text-sm font-medium tracking-wide text-white  transition-colors duration-300 transform bg-gray-800 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50">
+              class="w-full px-6 py-4 text-sm font-medium tracking-wide text-white  transition-colors duration-300 transform bg-emerald-700 dark:bg-gray-800 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50">
              Sign in
             </button>
           </div>
@@ -110,51 +110,52 @@
     </ion-content>
   </ion-page>
 </template>
-
 <script setup lang="ts">
 import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
 import { ref } from 'vue';
 import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useRouter } from 'vue-router';
+
 const email = ref("");
 const password = ref("");
-const errMsg = ref()
-const router = useRouter()
+const errMsg = ref();
+const router = useRouter();
+
 const register = () => {
-    signInWithEmailAndPassword(getAuth(), email.value, password.value)
-    .then((data) =>{
-      console.log("Succesfully Signed In!!");
-      router.push('/admin')
+  signInWithEmailAndPassword(getAuth(), email.value, password.value)
+    .then((data: any) => { // Add type annotation for the 'data' object
+      console.log("Successfully Signed In!!");
+      router.push('/admin');
     })
     .catch((error) => {
       console.log(error.code);
-      switch(error.code) {
-      case "auth/invalid-email":
-       errMsg.value = "Invalid Email";
-        break;
+      switch (error.code) {
+        case "auth/invalid-email":
+          errMsg.value = "Invalid Email";
+          break;
         case "auth/user-not-found":
-        errMsg.value = "No Account with that email was found";
-        break;
+          errMsg.value = "No Account with that email was found";
+          break;
         case "auth/wrong-password":
-        errMsg.value = "Incorrect Password";
-        break;
+          errMsg.value = "Incorrect Password";
+          break;
       }
-    })
+    });
 };
+
 const signInWithGoogle = () => {
-const provider = new GoogleAuthProvider();
-signInWithPopup(getAuth(), provider)
-.then((result) => {
-  console.log(result.user);
-  router.push('/admin');
-})
-.catch((error) => {
+  const provider = new GoogleAuthProvider();
+  signInWithPopup(getAuth(), provider)
+    .then((result: any) => { // Add type annotation for the 'result' object
+      console.log(result.user);
+      router.push('/admin');
+    })
+    .catch((error) => {
 
-});
+    });
 };
-
-
 </script>
+
 
 <style scoped>
 #container {
