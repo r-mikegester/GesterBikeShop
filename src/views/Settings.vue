@@ -79,6 +79,7 @@
         <section class="py-6 dark:bg-gray-800 dark:text-gray-50">
 		<div class="grid max-w-6xl grid-cols-1 px-6 mx-auto lg:px-8 md:grid-cols-2 md:divide-x">
 			<div class="py-6 md:py-0 md:px-6">
+        <input type="checkbox" v-model="isDarkMode" @change="toggleColorTheme" />
 				<h1 class="text-4xl font-bold">Book a Repair</h1>
 				<p class="pt-2 pb-4">Fill in the form to start a conversation</p>
 				<div class="space-y-4">
@@ -134,6 +135,20 @@ export default defineComponent({
     IonPage, IonHeader, IonToolbar, IonTitle, IonContent,IonToggle, IonButtons, IonItem, IonMenuButton
   },
   name: 'MyComponent',
+  data() {
+    return {
+      isDarkMode: false,
+    };
+  },
+  methods: {
+    toggleColorTheme() {
+      if (this.isDarkMode) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    },
+  },
   mounted() {
     var themeToggleDarkIcon = document.getElementById(
       "theme-toggle-dark-icon"
