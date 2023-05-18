@@ -17,19 +17,39 @@
       </ion-header>
 
       <div class=" w-screen h-screen bg-white">
-        <div class="max-w-full px-5 sm:px-6 lg:px-8">
-  <div class="bg-white bg-[url('../svg/component/abstract-1.svg')] bg-no-repeat bg-cover mx-auto w-auto fixed border-b-2 bg-center p-5  text-center">
-    <p class="mr-2 inline-block text-emerald-500">
-     Get Started Right Now!
-    </p>
-    <a class="py-2 px-3 inline-flex text-emerald-500 justify-center items-center gap-2 rounded-full border-2 border-emerald-500 font-semibold  hover:bg-white/[.1] hover:border-white/[.1] focus:outline-none focus:ring-2 focus:ring-blue-900 focus:ring-offset-2 transition-all text-sm" href="../figma.html">
-      Contact Us!
-      <svg class="w-2.5 h-2.5" width="16" height="16" viewBox="0 0 16 16" fill="none">
-        <path d="M5.27921 2L10.9257 7.64645C11.1209 7.84171 11.1209 8.15829 10.9257 8.35355L5.27921 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-    </a>
+<!-- Announcement Banner -->
+<div class="bg-gradient-to-r from-pink-600 to-emerald-400 fixed w-full">
+  <div class="max-w-[85rem] px-4 py-4 sm:px-6 lg:px-8 mx-auto">
+    <!-- Grid -->
+    <div class="grid justify-center md:grid-cols-2 md:justify-between md:items-center gap-2">
+      <div class="text-center md:text-left md:order-2 md:flex md:justify-end md:items-center">
+        <p class="mr-5 inline-block text-sm font-semibold text-white">
+          Ready to get started?
+        </p>
+        <a class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border-2 border-white font-medium text-white hover:bg-white hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 transition-all text-sm" href="/Register">
+          Sign up
+        </a>
+      </div>
+      <!-- End Col -->
+
+      <!--<div class="flex items-center">
+        <a class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md font-medium text-white hover:bg-white/[.1] focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 transition-all text-sm" href="#">
+          <svg class="w-3 h-3" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z"/>
+          </svg>
+          Watch demo
+        </a>
+        <span class="inline-block border-r border-white/[.3] w-px h-5 mx-2"></span>
+        <a class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md font-medium text-white hover:bg-white/[.1] focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 transition-all text-sm" href="#">
+          Explore what's new
+        </a>
+      </div>-->
+      <!-- End Col -->
+    </div>
+    <!-- End Grid -->
   </div>
 </div>
+<!-- End Announcement Banner -->
         <div
           class="bg-fixed bg-contain top-0 overflow-auto bg-no-repeat w-screen h-full brightness-50 backdrop-brightness-0"
           style="background-image: url('https://c.pxhere.com/photos/95/70/bicycle_bicycles_bike_repair_shop_support-1176393.jpg!d'); background-size: cover; background-position: center; ">
