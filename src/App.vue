@@ -1,7 +1,7 @@
 <template>
   <ion-app>
-    <ion-split-pane content-id="main-content">
-      <ion-menu content-id="main-content" type="push" mode="md">
+
+      <ion-menu content-id="main-content" type="overlay" mode="md"  @ionWillClose="handleMenuClose">
         <ion-header>
           <ion-toolbar class="flex">
             <img src="./assets/imgs/logo/mylogo.png" class="w-10 h-10  ml-5" slot="start" />
@@ -63,7 +63,7 @@
                 <ion-label>Sign up</ion-label>
               </ion-item>
               
-              <ion-item @click="handleSignOut" v-if="isLoggedIn" :detail="true" class="rounded-2xl bg-gray-100 dark:bg-[#1f1f1f]">
+              <ion-item @click="handleSignOut" v-if="isLoggedIn" :detail="true" class="rounded-2xl bg-gray-100 dark:bg-[#1f1f1f]" >
                 <ion-label>Logout</ion-label>
               </ion-item>
 
@@ -73,7 +73,7 @@
         </ion-content>
       </ion-menu>
       <ion-router-outlet id="main-content"></ion-router-outlet>
-    </ion-split-pane>
+
   </ion-app>
 </template>
 
@@ -85,7 +85,17 @@ import { Auth, getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 const router = useRouter();
 const isLoggedIn = ref(false);
 const isLoggedOut = ref(true);
+const menu = ref<HTMLElement | null>(null);
 
+// Method to handle menu close action
+const handleMenuClose = () => {
+  if (menu.value) {
+    const parentMenu = menu.value.closest('ion-menu');
+    if (parentMenu) {
+      parentMenu.close();
+    }
+  }
+};
 let auth: Auth;
 onMounted(() => {
   auth = getAuth();
@@ -110,7 +120,7 @@ import {
   IonContent,
   IonMenu,
   IonRouterOutlet,
-  IonSplitPane,
+
   IonHeader,
   IonTitle,
   IonToolbar,
