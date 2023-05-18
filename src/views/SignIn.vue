@@ -112,18 +112,21 @@
 </template>
 <script setup lang="ts">
 import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
-import { ref } from 'vue';
-import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { ref, onMounted } from 'vue';
+import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, getRedirectResult, Auth } from 'firebase/auth';
 import { useRouter } from 'vue-router';
+import firebase from 'firebase/app';
+
 
 const email = ref("");
 const password = ref("");
-const errMsg = ref();
+const errMsg = ref("");
 const router = useRouter();
+let auth: Auth;
 
 const register = () => {
   signInWithEmailAndPassword(getAuth(), email.value, password.value)
-    .then((data: any) => { // Add type annotation for the 'data' object
+    .then((data: any) => {
       console.log("Successfully Signed In!!");
       router.push('/admin');
     })
@@ -143,18 +146,55 @@ const register = () => {
     });
 };
 
-const signInWithGoogle = () => {
+const signInWithGoogle = async () => {
   const provider = new GoogleAuthProvider();
-  signInWithPopup(getAuth(), provider)
-    .then((result: any) => { // Add type annotation for the 'result' object
-      console.log(result.user);
-      router.push('/admin');
-    })
-    .catch((error) => {
+  const auth = getAuth();
 
+  try {
+    await signInWithPopup(auth, provider);
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log(user);
+        router.push('/admin');
+      } else {
+        console.log("Sign-in failed.");
+      }
     });
+  } catch (error) {
+    console.error(error);
+  }
 };
+
+onMounted(async () => {
+  try {
+    const result = await getRedirectResult(auth);
+    if (result && result.user) {
+      // User signed in successfully
+      // Resume the operation that was interrupted
+      const user = result.user;
+      // Fetch the user data from Firebase Authentication
+      const { uid, email, metadata } = user;
+
+      // Retrieve the last sign-in time from the user metadata
+      const lastSignInTime = metadata.lastSignInTime;
+
+      // Perform any additional operations with the user data
+
+      // Example: Display the email and last sign-in time on the dashboard
+      console.log(`Email: ${email}`);
+      console.log(`Last Sign-in Time: ${lastSignInTime}`);
+    } else {
+      // User is not signed in
+      // Do something else
+    }
+  } catch (error) {
+    console.error(error);
+  }
+});
 </script>
+
+
 
 
 <style scoped>
