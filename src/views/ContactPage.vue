@@ -18,7 +18,7 @@
 
       <div id="container" class="">
         <section class="min-h-screen bg-white dark:bg-gray-900">
-          <div class="container px-6 py-20 mt-80 mx-auto bg-white dark:bg-gray-900">
+          <div class="container px-6 py-20 mt-56 mx-auto bg-white dark:bg-gray-900">
             <div class="lg:flex lg:items-center lg:-mx-10">
               <div class="lg:w-1/2 lg:mx-10">
                 <h1 class="text-2xl font-semibold text-gray-800 capitalize dark:text-white lg:text-3xl">
